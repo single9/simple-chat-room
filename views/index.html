@@ -97,9 +97,8 @@
     </div>
 
     <script>
-        var max_record = 0;
-        
         document.addEventListener("DOMContentLoaded", () => {
+            var max_record;
 
             var status = document.getElementById("status");
             var online = document.getElementById("online");
@@ -124,16 +123,16 @@
                 online.innerText = amount;
             });
 
+            socket.on("maxRecord", function (amount) {
+                max_record = amount;
+            });
+
             socket.on("chatRecord", function (msgs) {
                 for (var i=0; i < msgs.length; i++) {
                     (function () {
                         addMsgToBox(msgs[i]);
                     })();
                 }
-            });
-
-            socket.on("maxRecord", function (amount) {
-                max_record = amount;
             });
 
             socket.on("msg", addMsgToBox);

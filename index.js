@@ -18,8 +18,8 @@ io.on('connection', (socket) => {
     // 發送人數給網頁
     io.emit("online", onlineCount);
     // 發送紀錄
-    socket.emit("chatRecord", records.get());
     socket.emit("maxRecord", records.getMax());
+    socket.emit("chatRecord", records.get());
 
     socket.on("greet", () => {
         socket.emit("greet", onlineCount);
