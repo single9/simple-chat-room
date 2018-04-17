@@ -19,7 +19,10 @@ io.on('connection', (socket) => {
     io.emit("online", onlineCount);
     // 發送紀錄
     socket.emit("maxRecord", records.getMax());
-    socket.emit("chatRecord", records.get());
+
+    records.get((msgs) => {
+        socket.emit("chatRecord", msgs);
+    });
 
     socket.on("greet", () => {
         socket.emit("greet", onlineCount);
